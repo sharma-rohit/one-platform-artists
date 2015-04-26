@@ -1,0 +1,22 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                    @controllers.UserController.index
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file        controllers.Assets.at(path="/public", file)
+
+#Artists
+GET         /search              @controllers.UserController.searchBar
+
+GET         /artist              @controllers.UserController.getArtists(n:Option[String])
+
+POST        /signup              @controllers.UserController.signUp
+
+POST        /signin              @controllers.UserController.signIn
+
+GET         /logout              @controllers.UserController.logOut
+
+GET         /history             @controllers.UserController.showSearchHistory

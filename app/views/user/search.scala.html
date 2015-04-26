@@ -1,0 +1,22 @@
+@()(implicit request: Request[AnyContent])
+@if(request.path!="/search") {
+    <div class="container">
+    @helper.form(action = routes.UserController.getArtists(None)) {
+        <div class="row searchBar">
+            <div class="col-md-8">
+                <input class="form-control" type="text" name="artistName" id="artistName" placeholder="You Favourite Artist"/>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-success" type="submit">Search</button>
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-default" href="@routes.UserController.showSearchHistory()">History</a>
+            </div>
+        </div>
+    }
+    </div>
+}else{
+    @common.main("NOT FOUND"){
+        <h1 class="more">PAGE CANNOT BE FOUND</h1>
+    }
+}

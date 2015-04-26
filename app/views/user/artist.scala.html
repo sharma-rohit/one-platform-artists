@@ -1,0 +1,60 @@
+@(artistList: List[domain.ArtistResult] = Nil, similarArtist: List[domain.SimilarArtistResult] = Nil)(implicit request: Request[AnyContent])
+@common.main("Artists") {
+    @views.html.user.search()
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6">
+                @if(artistList.size > 0) {
+                    <p class="search-item">Fav Artists (@artistList.size Fav Artists)</p>
+                }
+                @for(artist <- artistList) {
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="@artist.imageUrl(1)" alt="No Image Found" height="60" width="60">
+                        </div>
+                        <div class="col-md-8">
+                            <label>Artist Name : </label>
+                            <span>@artist.artistInfo.name</span>
+                            <br>
+                            <label>No. of Listeners : </label>
+                            <span>@artist.artistInfo.listeners</span>
+                            <br>
+                            <label>Website : </label>
+                            <span><a href="@artist.artistInfo.url">Click Here to Go</a></span>
+                        </div>
+                    </div>
+                    <hr>
+                    }
+            </div>
+
+            <div class="col-md-6">
+                @if(artistList.size > 0) {
+                    <p class="search-item">Similar Artists (@similarArtist.size Similar Artists)</p>
+                }
+                @for(sArtist <- similarArtist.take(artistList.size)) {
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="@sArtist.imageUrl(1)" alt="No Image Found" height="60" width="60">
+                        </div>
+                        <div class="col-md-8">
+                            <label>Artist Name : </label>
+                            <span>@sArtist.artistInfo.name</span>
+                            <br>
+                            <label>Match : </label>
+                            <span>@sArtist.mat</span>
+                            <br>
+                            <label>Website : </label>
+                            <span><a href="@sArtist.artistInfo.url">Click Here to Go</a></span>
+                        </div>
+                    </div>
+                    <hr>
+                }
+                @if(artistList.size > 0) {
+                    <span class="more"> @(similarArtist.size - artistList.size) More Similar Artists..</span>
+                }
+            </div>
+        </div>
+    </div>
+
+}

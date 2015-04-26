@@ -1,0 +1,24 @@
+@(title: String, scripts: Html = Html(""))(content: Html)(implicit request: Request[AnyContent])
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <base href="/">
+        <title>@title</title>
+        @common.styles()
+        <div class="nav">
+            <div class="container header">
+                <div class="row">
+                    <h1 class="header-logo">One Platform - Artists</h1>
+                    @if(CookieManager.isLoggedIn() && request.path != "/logout") {
+                        <span class="pull-right"><a class="logout" href="@routes.UserController.logOut()">Logout</a></span>
+                    }
+                </div>
+            </div>
+        </div>
+        @content
+        @common.scripts()
+    </head>
+    <body>
+    </body>
+</html>

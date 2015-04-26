@@ -1,0 +1,18 @@
+@(hisParams: Seq[String] = Nil)(implicit request: Request[AnyContent])
+@common.main("Search History") {
+    @views.html.user.search()
+    <div class="container">
+        <div class="row">
+        @if(hisParams != Nil) {
+            <div class="col-md-6">
+            @for(h <- hisParams) {
+                <span class="more"><a href="@routes.UserController.getArtists(Some(h))">@h</a></span>
+                <hr>
+                }
+            </div>
+        } else {
+            <span class="more">No search history available</span>
+        }
+        </div>
+    </div>
+}
